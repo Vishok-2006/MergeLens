@@ -1,0 +1,1 @@
+package com.codelens.repo;import com.codelens.entity.*;import org.springframework.data.jpa.repository.JpaRepository;import java.util.*;public interface ReviewCommentRepo extends JpaRepository<ReviewCommentEntity,Long>{List<ReviewCommentEntity> findByPullRequestId(Long prId);}

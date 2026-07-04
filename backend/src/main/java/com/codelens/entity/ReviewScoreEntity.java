@@ -1,0 +1,1 @@
+package com.codelens.entity;import jakarta.persistence.*;import lombok.*;@Entity @Table(name="review_scores") @Getter @Setter @NoArgsConstructor public class ReviewScoreEntity{@Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; @OneToOne(optional=false) PullRequestEntity pullRequest; Integer securityScore; Integer qualityScore; Integer complexityScore;}
