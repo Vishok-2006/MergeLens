@@ -1,1 +1,0 @@
-package com.codelens.entity;import jakarta.persistence.*;import lombok.*;@Entity @Table(name="repositories") @Getter @Setter @NoArgsConstructor public class RepositoryEntity{@Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; @Column(unique=true,nullable=false) String fullName; String htmlUrl; public RepositoryEntity(String f,String u){fullName=f;htmlUrl=u;}}

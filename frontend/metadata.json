@@ -1,0 +1,6 @@
+{
+  "name": "MergeLens",
+  "description": "An AI-powered Repository Intelligence Platform. Analyze public GitHub repositories for code quality, security, performance, and architecture with interactive chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

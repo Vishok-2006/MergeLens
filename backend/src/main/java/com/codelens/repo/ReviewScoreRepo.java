@@ -1,1 +1,0 @@
-package com.codelens.repo;import com.codelens.entity.*;import org.springframework.data.jpa.repository.JpaRepository;import java.util.*;public interface ReviewScoreRepo extends JpaRepository<ReviewScoreEntity,Long>{Optional<ReviewScoreEntity> findByPullRequestId(Long prId);}

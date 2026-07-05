@@ -1,1 +1,0 @@
-package com.codelens.repo;import com.codelens.entity.RepositoryEntity;import org.springframework.data.jpa.repository.JpaRepository;import java.util.*;public interface RepositoryRepo extends JpaRepository<RepositoryEntity,Long>{Optional<RepositoryEntity> findByFullName(String fullName);}
