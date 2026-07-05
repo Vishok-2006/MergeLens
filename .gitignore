@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Build output
+dist/
+build/
+
+# Env files (never commit secrets)
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Logs
+npm-debug.log*
+*.log
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+
+# Misc
+*.tsbuildinfo

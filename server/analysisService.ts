@@ -82,10 +82,15 @@ export async function fetchGithubRepoData(owner: string, repo: string): Promise<
   readme: string;
   files: string[];
 }> {
-  const headers = {
+  const headers: Record<string, string> = {
     'User-Agent': 'MergeLens-Platform',
     'Accept': 'application/vnd.github.v3+json',
   };
+  // Attach a personal access token if provided to raise GitHub's rate limits
+  // (60/hr unauthenticated vs 5000/hr authenticated) and avoid 403s.
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
 
   // 1. Fetch metadata
   const metaRes = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
@@ -324,7 +329,7 @@ Generate a comprehensive engineering review. You MUST strictly return a single J
 Ensure the analysis feels incredibly real, tailored to ${metadata.primaryLanguage} and ${metadata.framework} conventions, naming files that actually exist in the file list if possible, or suggesting improvements targeting standard configuration files (like package.json, main.py, or tsconfig.json).`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-2.5-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -652,7 +657,7 @@ ${JSON.stringify(report, null, 2)}
 Provide clear, friendly, expert answers to the user's questions regarding this repository. Use clean markdown. Keep responses concise, precise, and practical. Offer concrete code suggestions or structure fixes matching the repository language.`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-2.5-flash",
     contents: [
       ...chatHistory
     ],

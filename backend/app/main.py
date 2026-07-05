@@ -1,6 +1,6 @@
 import time
 from fastapi import FastAPI, Request, status
-from fastapi.responses import JSONEncoder
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timezone
 
@@ -71,10 +71,13 @@ async def global_unhandled_exception_handler(request: Request, exc: Exception):
     Transforms any internal server exception into unified formatted JSON schemas.
     """
     logger.error(f"Internal server error on {request.url.path}: {str(exc)}", exc_info=exc)
-    return JSONEncoder().encode({
-        "status": "failed",
-        "message": "An unexpected error occurred during operation.",
-        "data": None,
-        "errors": [str(exc)],
-        "timestamp": datetime.now(timezone.utc).isoformat()
-    })
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "status": "failed",
+            "message": "An unexpected error occurred during operation.",
+            "data": None,
+            "errors": [str(exc)],
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+    )
